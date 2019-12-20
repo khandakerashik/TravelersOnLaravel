@@ -1,55 +1,34 @@
 <!DOCTYPE html>
 <html>
+	<head>
+		<title>Registration page</title>
+		<link rel="stylesheet" href=" /css/bootstrap.min.css">
+		<script src=" /js/bootstrap.bundle.min.js"></script>
+		<script src=" /js/jquery.slim.min.js"></script>
+		<link rel="stylesheet" href=" /css/registration.css">
+	</head>
+	<body>
+		<div class="label col-12 text-center">
+		    <a href="/home"><img class="label-image my-3" src=" /images/logo.png" height="160" width="160"></a>
+		 </div>
 
-<head>
-	<title>Registration page</title>
-</head>
-<body>
-	<h1>Register</h1>
-	
-	<form method="post" enctype="multipart/form-data">
-		{{csrf_field()}}
-	<table border="0">
-		<tr>
-        <tr>
-			<td>NAME</td>
-			<td><input type="text" name="name" value="{{old('name')}}"></td>
-		</tr>
-			<td>USERNAME</td>
-			<td><input type="text" name="username" value="{{old('username')}}"></td>
-		</tr>
-		<tr>
-			<td>PASSWORD</td>
-			<td><input type="password" name="password" value="{{old('password')}}"></td>
-		</tr>
-		<tr>
-			<td>EMAIL</td>
-			<td><input type="text" name="email" value="{{old('contact')}}"></td>
-		</tr>
-        <tr>
-			<td>CONTACT</td>
-			<td><input type="text" name="contact" value="{{old('contact')}}"></td>
-		</tr>
-        <tr>
-			<td>TYPE</td>
-			<td><select name="type"> 
-            <option value="admin">Admin</option>
-            <option value="customer">Customer</option>
-            </select>
-            </td>
-		</tr>
-		<tr>
-			<td><input type="submit" name="submit" value="Save"></td>
-			<td></td>
-		</tr>
-	</table>
-</form>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="table-data1 text-center col-sm-9 col-md-6 col-lg-6">
+					<div class="data1">
+						<a class="label-anchor text-white my-5" href="/registration/freaks"><img class="label-image my-4" src=" /images/freaks.png" height="150" width="150"> </br> Register as Freaks</a>
+					</div>
+					<p class="paragraph justify-content-center text-white my-4">Freaks</p>
+				</div>
 
-@foreach($errors->all() as $err)
-	{{$err}} <br>
-@endforeach	
-</body>
+				<div class="table-data2 text-center col-sm-9 col-md-6 col-lg-6">
+					<div class="data2">
+						<a class="label-anchor text-white my-5" href="/registration/agencies"><img class="label-image my-4" src=" /images/agencies.png" height="150" width="150"> </br> Register as Agencies</a>
+					</div>
+					<p class="paragraph justify-content-center text-white my-4">Travel Agency</p>
+				</div>
+
+			</div>
+		</div>
+	</body>
 </html>
-
-
-

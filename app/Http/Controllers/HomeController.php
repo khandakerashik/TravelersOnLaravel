@@ -11,17 +11,14 @@ class HomeController extends Controller
 {
     function index(Request $request){
 
-		$user = DB::table('users')->where('id', session('user.userId'))
-		->get(); 
+		$blogs = DB::table('blog')
+		->get();
+
+		$events = DB::table('events')
+		->get();
 	
-		return view('home.index')->with('users', $user);
+		return view('home.index')->with('blogs', $blogs)->with('events', $events);
 	}
-	function homeram(Request $request){
-
-		$products = DB::table('products')->get(); 
-    	return view('products.homeram')->with('product', $products);
-
-    }
 }
 
 

@@ -32,7 +32,15 @@ class LoginController extends Controller
 			$req->session()->put('name', $user ->name) ;
 			$req->session()->put('id', $req->input('id'));
 			$req->session()->put('password', $req->input('password'));
+			$req->session()->put('profile_pic', $user ->profile_pic);
 			$req->session()->put('user', $user);
+
+			// $pic = DB::table('users')
+            // ->join('admins', 'users.email', '=', 'admins.email')
+            // ->select('users.*', 'admins.profile_pic')
+			// ->get();
+			// $req->session()->put('pic', $pic->profile_pic);
+
 
 			$type = $req->session()->get('user');
 

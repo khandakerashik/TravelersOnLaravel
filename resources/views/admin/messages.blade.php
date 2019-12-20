@@ -32,7 +32,7 @@
                         <tr>
                           <th> </th>
                           <th> </th>
-                          <th> <a href="/admin/sendmessage"> <button class="btn btn-lg btn-block" type="submit">Send Message</button></a> </th>
+                          <th> <a href="{{route('admin.sendmessage')}}"> <button class="btn btn-lg btn-block" type="submit">Send Message</button></a> </th>
                         </tr>
                       </thead>
                     <thead>
@@ -48,10 +48,10 @@
                       <td>{{$m->sender}}</td>
                       <td>{{$m->message}}</td>
                       <td>
-                        <a href="/admin/message/reply/{{$m->id}}">Reply</a>
+                        <a href="{{route('admin.messagereplyview', $m->id)}}">Reply</a>
                       </td>
                       <td>
-                          <a href="/admin/message/read/{{$m->id}}">Mark As Read</a>
+                          <a href="{{route('admin.markreadmessage', $m->id)}}">Mark As Read</a>
                         </td>
                     </tr>
                     @endforeach

@@ -32,9 +32,12 @@ Route::group(['middleware'=>['sess']], function(){
 	 Route::get('/admin/index', 'AdminController@index')->name('admin.index');
 
 	 Route::get('/admin/profile', 'AdminController@profile')->name('admin.profile');
+	 Route::get('/admin/editprofile', 'AdminController@editprofile')->name('admin.editprofile');
+	 Route::post('/admin/editprofile', 'AdminController@updateprofile')->name('admin.updateprofile');
 
-	 Route::get('/admin/asd', ['as'=>'admin.addadmin','uses'=>'AdminController@addadmin']);
-	 Route::get('/admin/inasddex', ['as'=>'admin.insertadmin','uses'=>'AdminController@insertadmin']);
+
+	 Route::get('/admin/addadmin', ['as'=>'admin.addadmin','uses'=>'AdminController@addadmin']);
+	 Route::post('/admin/addadmin', ['as'=>'admin.insertadmin','uses'=>'AdminController@insertadmin']);
 
 	 Route::get('/admin/changepassword/{email}', 'AdminController@changepassword')->name('admin.changepassword');
 	 Route::post('/admin/changepassword/{email}', 'AdminController@insertpassword')->name('admin.insertpassword');
@@ -54,6 +57,17 @@ Route::group(['middleware'=>['sess']], function(){
 	 Route::post('/admin/pendingevents/delete/{id}', 'AdminController@confirmdeleteevent')->name('admin.deleteevent');
 
 	 Route::get('/admin/messages', 'AdminController@messages')->name('admin.messages');
+
+	 Route::get('/admin/messages/reply/{id}', 'AdminController@messagereplyview')->name('admin.messagereplyview');
+	 Route::post('/admin/messages/reply/{id}', 'AdminController@messagereply')->name('admin.messagereply');
+
+	 Route::get('/admin/messages/markread/{id}', 'AdminController@markreadmessage')->name('admin.markreadmessage');
+	 Route::post('/admin/messages/markread/{id}', 'AdminController@updatereadstatus')->name('admin.updatereadstatus');
+
+	 Route::get('/admin/sendmessage', 'AdminController@sendmessageview')->name('admin.sendmessageview');
+	 Route::post('/admin/sendmessage', 'AdminController@sendmessage')->name('admin.sendmessage');
+
+
 	 Route::get('/admin/notifications', 'AdminController@notifications')->name('admin.notifications');
 	// Route::get('/admin/ban/{id}', 'AdminController@cban')->name('admin.cban');
 	// Route::post('/admin/ban/{id}', 'AdminController@ban')->name('admin.ban');

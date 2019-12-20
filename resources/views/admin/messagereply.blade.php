@@ -3,7 +3,7 @@
 <html class="supernova"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-<title> Send Message | Admin Panel</title>
+<title> Reply Message | Admin Panel</title>
 <link href="https://cdn.jotfor.ms/static/formCss.css?3.3.14553" rel="stylesheet" type="text/css" />
 <link type="text/css" rel="stylesheet" href="https://cdn.jotfor.ms/css/styles/nova.css?3.3.14553" />
 <link type="text/css" media="print" rel="stylesheet" href="https://cdn.jotfor.ms/css/printForm.css?3.3.14553" />
@@ -1259,13 +1259,22 @@ JotForm.paymentExtrasOnTheFly([null,null,{"name":"submit","qid":"2","text":"SUBM
         <div class="form-header-group ">
           <div class="header-text httal htvam">
             <h1 id="header_9" class="form-header" data-component="header">
-              Send A Message!
+              Reply
             </h1>
             <div id="subHeader_9" class="form-subHeader">
-              You can send message to freaks and agencies. Stay connected!
+             Reply to a message you recieved earlier. Stay connected!
             </div>
           </div>
         </div>
+      </li>
+      <li class="form-line jf-required" data-type="control_textbox" id="id_8">
+        <label class="form-label form-label-top form-label-auto" id="label_8" for="input_8">
+          You are replying to  this message:
+          <div id="cid_7" class="">
+          @foreach($message as $m)
+          {{$m->message}}
+        </div>
+        </label>
       </li>
       <li class="form-line jf-required" data-type="control_textbox" id="id_8">
         <label class="form-label form-label-top form-label-auto" id="label_8" for="input_8">
@@ -1276,31 +1285,27 @@ JotForm.paymentExtrasOnTheFly([null,null,{"name":"submit","qid":"2","text":"SUBM
       </li>
       <li class="form-line jf-required" data-type="control_email" id="id_7">
         <label class="form-label form-label-top form-label-auto" id="label_7" for="input_7">
-          To:
-          <span class="form-required">
-            *
-          </span>
+          To: {{$m->sender}}
+          <input type='hidden' name='reciever' value='{{$m->sender}}'>
         </label>
-        <div id="cid_7" class="form-input-wide jf-required">
-          <input type="email" id="input_7" name="reciever" class="form-textbox validate[required, Email]" size="25" value="" placeholder="Enter reciever E-mail " data-component="email" aria-labelledby="label_7" required="" />
-        </div>
       </li>
       <li class="form-line jf-required" data-type="control_textarea" id="id_4">
         <label class="form-label form-label-top form-label-auto" id="label_4" for="input_4">
-          Message
+          Reply
           <span class="form-required">
             *
           </span>
         </label>
         <div id="cid_4" class="form-input-wide jf-required">
-          <textarea id="input_4" class="form-textarea validate[required]" name="message" cols="28" rows="6" data-component="textarea" required="" aria-labelledby="label_4"></textarea>
+          <textarea id="input_4" class="form-textarea validate[required]" name="reply" cols="28" rows="6" data-component="textarea" required="" aria-labelledby="label_4"></textarea>
         </div>
       </li>
+      @endforeach
       <li class="form-line" data-type="control_button" id="id_2">
         <div id="cid_2" class="form-input-wide">
           <div style="text-align:center" class="form-buttons-wrapper ">
             <button id="input_2" type="submit" name='submit' class="form-submit-button form-submit-button-none" data-component="button">
-              SEND!
+              REPLY!
             </button>
           </div>
         </div>

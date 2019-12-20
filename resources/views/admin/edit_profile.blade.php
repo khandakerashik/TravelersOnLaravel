@@ -24,31 +24,29 @@
           <div class="card card-signin my-4">
             <div class="card-body">
               <form class="form-signin" method="post">
+              @foreach($admin as $a)
                 <div class="form-label-group my-4">
-                  <input type="text" id="inputName" name="inputName" class="form-control" placeholder="Name" required value="<%= data.name %>">
+                  <input type="text" id="inputName" name="inputName" class="form-control" placeholder="Name" required value="{{$a->name}}">
                   <label for="inputName">Name</label>
                 </div>
                 <div class="form-label-group my-4">
-                  <input type="text" id="inputPhone" name="inputPhone" class="form-control" placeholder="Phone No" required value="<%= data.phone %>">
+                  <input type="text" id="inputPhone" name="inputPhone" class="form-control" placeholder="Phone No" required value="{{$a->phone}}">
                   <label for="inputPhone">Phone No</label>
                 </div>
-
                 <div class="form-label-group my-4">
-                  <input type="password" id="inputPassword" name="inputPassword" class="form-control" placeholder="Password" required value="<%= data.password %>" >
-                  <label for="inputPassword">Password</label>
+                  <input id="pic" name="pic" class="form-control" type="file">
+                  <label for="pic">Profile Picture</label>
                 </div>
-                
-                <div class="form-label-group my-4">
-                  <input type="password" id="inputConfirmPassword" name="inputConfirmPassword" class="form-control" placeholder="Password" required value="<%= data.password %>">
-                  <label for="inputConfirmPassword">Confirm password</label>
-                </div>
-
-                <div class="form-label-group my-4">
-                  <input id="inputImage" name="inputImage" class="form-control" type="file">
-                </div>
-
-
                 <button class="btn btn-lg btn-block my-4" type="submit">Update</button>
+                <div class="form-label-group my-4">
+                <a href="{{route('admin.changepassword', $a->email)}}">Want to change your password?</a>
+                @endforeach
+                 </div>
+                  <div class="form-group">
+                    @foreach($errors->all() as $err)
+                      {{$err}} <br>
+                    @endforeach	
+                  </div>
               </form>
             </div>
           </div>

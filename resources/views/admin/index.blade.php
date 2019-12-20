@@ -85,7 +85,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="col-md-4 market-update-gd">
 				<div class="market-update-block clr-block-1">
 					<div class="col-md-8 market-update-left">
-						<h3><%= result.id %></h3>
+						
+						<h3>{{$users}}</h3> 
+				
 						<h4>Registered User(s)</h4>
 						<p></p>
 					</div>
@@ -99,7 +101,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="col-md-4 market-update-gd">
 				<div class="market-update-block clr-block-3">
 					<div class="col-md-8 market-update-left">
-						<h3><%= result2.id %></h3>
+						<h3>{{$messages}}</h3>
 						<h4>Message(s)</h4>
 						<p>A messeging service developed by Traveler'S.</p>
 					</div>
@@ -127,8 +129,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<h3>Users</h3>
 				</div>
 				<div class='bar_group'>
-						<div class='bar_group__bar thin' label='Freaks' show_values='true' tooltip='true' value='<%= result3.id %>'></div>
-						<div class='bar_group__bar thin' label='Agencies' show_values='true' tooltip='true' value='<%= result4.id %>'></div>
+						<div class='bar_group__bar thin' label='Freaks' show_values='true' tooltip='true' value='{{$freaks}}'></div>
+						<div class='bar_group__bar thin' label='Agencies' show_values='true' tooltip='true' value='{{$agencies}}'></div>
 				</div>
 			<!--//Progress bars-->
 			</div>
@@ -147,8 +149,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<h3>Published</h3>
 					</div>
 					<div class='bar_group'>
-							<div class='bar_group__bar thin' label='Blogs' show_values='true' tooltip='true' value='<%= result5.id %>'></div>
-							<div class='bar_group__bar thin' label='Events' show_values='true' tooltip='true' value='<%= result6.id %>'></div>
+							<div class='bar_group__bar thin' label='Blogs' show_values='true' tooltip='true' value='{{$blogs}}'></div>
+							<div class='bar_group__bar thin' label='Events' show_values='true' tooltip='true' value='{{$events}}'></div>
 					</div>
 						<script src=" /js/bars.js"></script>
 	
@@ -165,11 +167,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 										<script>
 											var pieData = [
 												{
-													value: '<%= result3.id %>',
+													value: '{{$agencies}}',
 													color:"#337AB7"
 												},
 												{
-													value : '<%= result4.id %>',
+													value : '{{$freaks}}',
 													color : "#FC8213"
 												},
 											
@@ -188,11 +190,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 											<script>
 												var pieData = [
 													{
-														value: '<%= result5.id %>',
+														value: '{{$events}}',
 														color:"#337AB7"
 													},
 													{
-														value : '<%= result6.id %>',
+														value : '{{$blogs}}',
 														color : "#FC8213"
 													},
 												

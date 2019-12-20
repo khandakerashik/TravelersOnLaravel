@@ -6,7 +6,7 @@
 <body>
 	<h1>Welcome Back, {{session('name')}}</h1>
 	<h1>{{session('name')}}'s Profile</h1> 
-	<a href="{{route('customer.home')}}">Home</a> |
+	<a href="/home">Home</a> |
 	<a href="/logout">logout</a>
 	<table>
 	<tr>
@@ -16,7 +16,7 @@
 		</tr>
 		<tr>
 			<td>USERNAME</td>
-			<td>{{$s->username}}</td>
+			<td>{{$s->name}}</td>
 		</tr>
 		<tr>
 			<td>PASSWORD</td>
@@ -30,10 +30,7 @@
 			<td>Email</td>
 			<td>{{$s->email}}</td>
 		</tr>
-		<tr>
-			<td>Contact</td>
-			<td>{{$s->contact}}</td> @endforeach
-		</tr>
+		@endforeach
 	</table>
 	
 </body>

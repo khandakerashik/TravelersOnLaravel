@@ -5,7 +5,7 @@
   <body> 
     <header class="main_menu_area">
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="/home"><img src="  /images/logo.png" alt="" height="110px" width="110px"></a>
+        <a class="navbar-brand" href="/home"><img src=" /images/logo.png" alt="" height="110px" width="110px"></a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav">
             <li class="nav-item"><a class="nav-link" href="/home">Home</a></li>

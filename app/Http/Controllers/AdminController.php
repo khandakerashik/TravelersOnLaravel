@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\admin;
 use App\users;
 use App\event;
-use App\product;
+use App\message;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StudentRequest;
 use Validator;
@@ -14,7 +15,19 @@ class AdminController extends Controller
 {
     public function index(){
 
-		return view('admin.index');
+        $users = DB::table('users')->count('id'); 
+        $messages = DB::table('admin_message')->count('id');
+        $freaks = DB::table('freaks')->count('id');
+        $agencies = DB::table('travel_agencies')->count('id');
+        $events = DB::table('events')->count('id');
+        $blogs = DB::table('blog')->count('id');
+        return view('admin.index')
+        ->with('users', $users)
+        ->with('messages', $messages)
+        ->with('agencies', $agencies)
+        ->with('events', $events)
+        ->with('blogs', $blogs)
+        ->with('freaks', $freaks);
     }
     public function home(){
 
@@ -64,11 +77,11 @@ class AdminController extends Controller
     }
 
 
-    function edit($id){
-        $user = DB::table('products')->where('id', $id)
+    function editprofile(){
+        $admin = DB::table('admins')->where('email', session('user.email'))
         ->get(); 
     
-        return view('admin.edit')->with('users', $user);
+        return view('admin.edit_profile')->with('admin', $admin);
     }
     function confirmapproveevent(Request $req, $id){
 
@@ -111,11 +124,10 @@ class AdminController extends Controller
     }
     
 	
-	function update(Request $req, $id){
+	function updateprofile(Request $req){
         $validation = Validator::make($req->all(), [
-            'name'=>'required',
-            'contact'=>'required',
-            'password'=>'required|max:4'
+            'inputName'=>'required|min:6',
+            'inputPhone'=>'required|max:11',
         ]);
 
         if($validation->fails()){
@@ -123,27 +135,83 @@ class AdminController extends Controller
                     ->with('errors', $validation->errors())
                     ->withInput();
         }
-
-    	$author = author::find($id);
-        $author->name = $req->name;
-        $author->password = $req->password;
-        $author->contact = $req->contact;
-        $author->save();
         
-        return redirect()->route('author.index');
+        if($req->hasFile('pic')){
+            $file = $req->file('pic');
+
+            DB::table('admins')
+            ->where('email', session('user.email'))
+            ->update(['profile_pic' => $req->pic ]);
+
+            DB::table('users')
+            ->where('email', session('user.email'))
+            ->update(['profile_pic' => $req->pic]);
+        
+            echo $file->getClientOriginalName()."<br>";
+            echo $file->getClientOriginalExtension()."<br>";
+            echo $file->getSize()."<br>";
+            echo $file->getMimeType();
+           if($file->move('storage', $file->getClientOriginalName())) {
+            echo "success";
+           }
+        }else{
+            echo "upload fail";
+        }
+        //$req->pic->storeAs('storage', $req->pic->getClientOriginalName());
+
+        DB::table('admins')
+            ->where('email', session('user.email'))
+            ->update(['name' => $req->inputName , 'phone' => $req->inputPhone ]);
+
+            DB::table('users')
+            ->where('email', session('user.email'))
+            ->update(['name' => $req->inputName]);
+        
+        return redirect()->route('admin.profile');
     }
 
     function changepassword(){
-        $user = DB::table('admins')->where('email', session('user.email'))
+        $admin = DB::table('admins')->where('email', session('user.email'))
         ->get(); 
     
-        return view('admin.changepassword')->with('users', $user);
+        return view('admin.changepassword')->with('admin', $admin);
     }
     function messages(){
         $messages = DB::table('admin_message')
+        ->where('reciever','admin@travelers.com')
+        ->where('read_status','0')
         ->get(); 
     
         return view('admin.messages')->with('messages', $messages);
+    }
+
+    function messagereplyview($id){
+        $message = DB::table('admin_message')->where('id', $id)
+					->get(); 
+                
+            return view('admin.messagereply')->with('message', $message);
+    }
+
+    function messagereply(Request $req,$email){  
+        $message = new message();
+        $message->sender = "admin@travelers.com";
+        $message->reciever =$req->reciever;
+        $message->message = $req->reply;
+        $message->read_status = "0";
+        if($message->save()){
+            return redirect()->route('admin.messages');
+            }
+            else{
+                return redirect()->route('admin.messagereply');
+            }
+    }
+
+    function markreadmessage(Request $req, $id){
+    	$message = message::find($id);
+        $message->read_status = '1';
+        $message->save();
+        
+        return redirect()->route('admin.messages');
     }
 
     function notifications(){
@@ -156,11 +224,10 @@ class AdminController extends Controller
     }
 
 
-    function insertpassword(Request $req, $id){
+    function insertpassword(Request $req, $email){
         $validation = Validator::make($req->all(), [
-            'name'=>'required',
-            'contact'=>'required',
-            'password'=>'required|max:4'
+            'Password'=>'required|min:4',
+            'ConfirmPassword'=>'required|min:4'
         ]);
 
         if($validation->fails()){
@@ -168,14 +235,23 @@ class AdminController extends Controller
                     ->with('errors', $validation->errors())
                     ->withInput();
         }
+        if($req->Password == $req->ConfirmPassword){
+            DB::table('admins')
+            ->where('email', session('user.email'))
+            ->update(['password' => $req->Password]);
 
-    	$author = author::find($id);
-        $author->name = $req->name;
-        $author->password = $req->password;
-        $author->contact = $req->contact;
-        $author->save();
+            DB::table('users')
+            ->where('email', session('user.email'))
+            ->update(['password' => $req->Password]);
+
+            return redirect()->route('admin.profile');
+        }else{
+            $admin = DB::table('admins')->where('email', session('user.email'))
+            ->get(); 
         
-        return redirect()->route('author.index');
+            return view('admin.changepassword')->with('admin', $admin);
+        }
+       
     }
 
     function delete($id){
@@ -190,37 +266,34 @@ class AdminController extends Controller
     	return redirect()->route('admin.pendingevents');
     }
 
-    function add(){
+    function addadmin(){
 
-        return view('admin.addproduct');
+        return view('admin.addadmin');
     }
 
-    function insert(Request $req){
+    function insertadmin(Request $req){
+            $admin = new admin();
+            $admin->name = $req->inputName;
+            $admin->email = $req->inputEmail;
+            $admin->phone = $req->inputPhone;
+            $admin->gender = $req->inputGender;
+            $admin->password= $req->inputPassword;
+            $admin->profile_pic= 'freaks.png';
 
-        $validation = Validator::make($req->all(), [
-            'name'=>'required|min:5',
-            'category'=>'required',
-            'brand'=>'required',
-            'price' =>'required|integer'
-        ]);
+            if($admin->save()){
+                DB::table('users')->insert(
+                    ['name' => $req->inputName, 
+                    'email' => $req->inputEmail ,
+                    'status' => '1' ,
+                    'type' => 'admin',
+                    'profile_pic' => 'freaks.png',
+                    'password' => $req->inputPassword]
+                );
 
-        if($validation->fails()){
-            return back()
-                    ->with('errors', $validation->errors())
-                    ->withInput();
-        }
-
-            $product = new product();
-            $product->product_name = $req->name;
-            $product->brand = $req->brand;
-            $product->price = $req->price;
-            $product->category = $req->category;
-            $product->added_by= $req->session()->get('name');
-            if($product->save()){
-                return redirect()->route('product.add');
+                return redirect()->route('admin.index');
                 }
                 else{
-                    return redirect()->route('product.add');
+                    return redirect()->route('admin.addadmin');
                 }
         }
 
@@ -276,5 +349,21 @@ class AdminController extends Controller
                     }
                  }
             }
-    
+            function sendmessageview(){
+
+                return view('admin.sendmessage');
+            }
+            function sendmessage(Request $req){  
+                    $message = new message();
+                    $message->sender = "admin@travelers.com";
+                    $message->reciever = $req->reciever;
+                    $message->message = $req->message;
+                    $message->read_status = "0";
+                    if($message->save()){
+                        return redirect()->route('admin.messages');
+                        }
+                        else{
+                            return redirect()->route('admin.sendmessageview');
+                        }
+                }
 }

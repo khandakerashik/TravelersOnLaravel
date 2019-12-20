@@ -25,10 +25,11 @@
             <div class="card-body">
 
                 <div class="form-label-group my-4 text-center">
-                  <img src=" /images/freaks.png" alt="User Image" height="150px" width="150px" style=" border-radius: 50%;">
+                @foreach($admin as $a)
+                  <img src="/images/{{$a->profile_pic}}" alt="User Image" height="150px" width="150px" style=" border-radius: 50%;">
                 </div>
                 <div class="form-label-group my-4">
-                @foreach($admin as $a)
+                
                   <p name="inputName">Name:  {{$a->name}} </p>
                 </div>
 
