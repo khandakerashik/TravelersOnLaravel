@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 19, 2019 at 11:15 PM
+-- Generation Time: Dec 20, 2019 at 10:50 PM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.11
 
@@ -43,8 +43,11 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`id`, `name`, `email`, `phone`, `gender`, `password`, `profile_pic`) VALUES
-(1, 'Khandaker Ashik', 'ashik@gmail.com', '01818188181', 'male', '123456', '/abc/'),
-(2, 'Khandaker Ashik', 'kh.ashik96@gmail.com', '12345678', 'male', '123456', '/abc/');
+(1, 'Khandaker Ashik', 'ashik@gmail.com', '01818188187', 'male', 'pass', 'pro12.jpg'),
+(2, 'Khandaker Ashik', 'kh.ashik96@gmail.com', '12345678', 'male', '123456', '/abc/'),
+(4, 'newadmin', 'ashike@gmail.com', '123123123', 'male', 'pass', 'freaks.png'),
+(5, 'pictest', 'a@gmail.com', '1231', 'female', 'pass', 'freaks.png'),
+(6, 'pictest', 'a@gmail.com', '1231', 'female', 'pass', 'freaks.png');
 
 -- --------------------------------------------------------
 
@@ -56,7 +59,7 @@ CREATE TABLE `admin_message` (
   `id` int(100) NOT NULL,
   `sender` varchar(100) NOT NULL,
   `reciever` varchar(100) NOT NULL,
-  `message` varchar(100) NOT NULL,
+  `message` varchar(1000) NOT NULL,
   `read_status` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -65,8 +68,15 @@ CREATE TABLE `admin_message` (
 --
 
 INSERT INTO `admin_message` (`id`, `sender`, `reciever`, `message`, `read_status`) VALUES
-(1, 'kh.ashik', 'admin@travelers.com', 'hey there', '0'),
-(2, 'admin@travelers.com', 'kh.ashik', 'dfefs', '0');
+(1, 'ashik@gmail.com', 'admin@travelers.com', 'Hey there, a testing text from ashik. Hope it works ...!', '0'),
+(2, 'admin@travelers.com', 'kh.ashik', 'dfefs', '0'),
+(3, 'admin@travelers.com', 'a@gmail.com', 'Hey there,sending a hello!', '0'),
+(4, 'admin@travelers.com', '1', 'It worked ... :)\r\nDoes the reply works?', '0'),
+(5, 'admin@travelers.com', '1', 'It worked ... :)\r\nDoes the reply works?', '0'),
+(6, 'admin@travelers.com', 'Hey there, a testing text from ashik. Hope it works ...!', 'reciever works?', '0'),
+(7, 'admin@travelers.com', 'admin@travelers.com', 'does it works perfectly?', '0'),
+(8, 'admin@travelers.com', 'admin@travelers.com', 'now it works?', '1'),
+(9, 'admin@travelers.com', 'ashik@gmail.com', 'now it works fine?', '0');
 
 -- --------------------------------------------------------
 
@@ -204,8 +214,8 @@ CREATE TABLE `events` (
 
 INSERT INTO `events` (`id`, `title`, `postby`, `agencyname`, `place`, `date`, `duration`, `description`, `person_capacity`, `cost_per_person`, `image`, `catagory`, `status`) VALUES
 (1, 'Bandarban District\r\n', 'ashik@gmail.com', 'TravelersBD', 'Cos\'x Bazar', '10 Nov 2019', '', 'Bandarban town is the hometown of the Bohmong Chief (currently King, or Raja, U Cho Prue Marma) who is the head of the Bohmong Circle. Of the other hill districts, Rangamati is the Chakma Circle, headed by Raja Devasish Roy and Khagrachari is the Mong Circle, headed by Raja Sachingprue Marma. Bandarban is regarded as one of the most attractive travel destinations in Bangladesh. It also is the administrative headquarters of Bandarban district, which has turned into one of the most exotic tourist attractions in Bangladesh.', '17', '5000', 'bandarban.jpg', 'events', '1'),
-(2, 'Chittagong Division', 'kh.ashik96@gmail.com', 'FarhanBD', 'Shylet', '10 Oct 2019', '', 'Chittagong Division, officially known as Chattogram Division,[2] is geographically the largest of the eight administrative divisions of Bangladesh. It covers the south-easternmost areas of the country, with a total area of 33,771.18 km2 (13,039.13 sq mi)[3] and a population at the 2011 census of 28,423,019. The administrative division includes mainland Chittagong District, neighbouring districts and the Chittagong Hill Tracts.\r\n\r\nChittagong Division is home to Cox\'s Bazar, the longest natural sea beach in the world.;[4][5][6] as well as St. Martin\'s Island, Bangladesh\'s sole coral reef.', '40', '3000', 'chittagong.jpg', 'events', '0'),
-(4, 'Posted Event', 'R@gmail.com', 'SkyTravel', 'hh', '2019-11-06', '10', ' fff', '4000', '50', 'coxsbazar.jpg', 'event', '1');
+(2, 'Chittagong Division', 'kh.ashik96@gmail.com', 'AshikTravels', 'Shylet', '10 Oct 2019', '', 'Chittagong Division, officially known as Chattogram Division,[2] is geographically the largest of the eight administrative divisions of Bangladesh. It covers the south-easternmost areas of the country, with a total area of 33,771.18 km2 (13,039.13 sq mi)[3] and a population at the 2011 census of 28,423,019. The administrative division includes mainland Chittagong District, neighbouring districts and the Chittagong Hill Tracts.\r\n\r\nChittagong Division is home to Cox\'s Bazar, the longest natural sea beach in the world.;[4][5][6] as well as St. Martin\'s Island, Bangladesh\'s sole coral reef.', '40', '3000', 'chittagong.jpg', 'events', '0'),
+(4, 'Posted Event', 'R@gmail.com', 'SkyTravelers', 'hh', '2019-11-06', '10', ' fff', '4000', '50', 'coxsbazar.jpg', 'event', '1');
 
 -- --------------------------------------------------------
 
@@ -314,18 +324,21 @@ CREATE TABLE `users` (
   `email` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
   `type` varchar(100) NOT NULL,
-  `status` varchar(100) NOT NULL
+  `status` varchar(100) NOT NULL,
+  `profile_pic` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `password`, `type`, `status`) VALUES
-(19, 'farhan', 'farhan@gmail.com', 'pass', 'freaks', '1'),
-(20, 'ratul', 'ratul@gmail.com', '123456', 'agencies', '1'),
-(21, 'Khandaker Ashik', 'ashik@gmail.com', 'pass', 'admin', '1'),
-(22, 'Khandaker Ashik t', 'kh.ashik96@gmail.com', '123456', 'admin', '1');
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `type`, `status`, `profile_pic`) VALUES
+(19, 'farhan', 'farhan@gmail.com', 'pass', 'freaks', '1', ''),
+(20, 'ratul', 'ratul@gmail.com', 'pass', 'agencies', '1', ''),
+(21, 'Khandaker Ashik', 'ashik@gmail.com', 'pass', 'admin', '1', 'pro12.jpg'),
+(22, 'Khandaker Ashik t', 'kh.ashik96@gmail.com', '123456', 'admin', '1', ''),
+(23, 'newadmin', 'ashike@gmail.com', 'pass', 'admin', '1', 'freaks.png'),
+(25, 'sdfsf', 'sdfsfs@e.n', 'sfsfs', 'admin', '1', 'freaks.png');
 
 --
 -- Indexes for dumped tables
@@ -411,13 +424,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `admins`
 --
 ALTER TABLE `admins`
-  MODIFY `id` int(110) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(110) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `admin_message`
 --
 ALTER TABLE `admin_message`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `blog`
@@ -477,7 +490,7 @@ ALTER TABLE `travel_agencies`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
