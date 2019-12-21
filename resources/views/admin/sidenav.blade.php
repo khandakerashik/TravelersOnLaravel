@@ -20,6 +20,8 @@
         <li><a class="app-menu__item" href="{{route('admin.addadmin')}}"><i class="app-menu__icon fa fa-user-plus"></i><span class="app-menu__label">Add Admin</span></a></li>
         <li><a class="app-menu__item" href="{{route('admin.freakslist')}}"><i class="app-menu__icon fa fa-user"></i><span class="app-menu__label">Freaks</span></a></li>
         <li><a class="app-menu__item" href="{{route('admin.agencylist')}}"><i class="app-menu__icon fa fa-users"></i><span class="app-menu__label">Agencies</span></a></li> 
+        <li><a class="app-menu__item" href="{{route('admin.banedfreaksview')}}"><i class="app-menu__icon fa fa-user"></i><span class="app-menu__label">Banned Freaks</span></a></li>
+        <li><a class="app-menu__item" href="{{route('admin.banedagenciesview')}}"><i class="app-menu__icon fa fa-user"></i><span class="app-menu__label">Banned Agencies</span></a></li>
         <li><a class="app-menu__item" href="{{route('blog.index')}}"><i class="app-menu__icon fa fa-file-text"></i><span class="app-menu__label">Blogs</span></a></li>
         <li><a class="app-menu__item" href="{{route('event.index')}}"><i class="app-menu__icon fa fa-file-text"></i><span class="app-menu__label">Events</span></a></li>
         <li><a class="app-menu__item" href="{{route('admin.pendingevents')}}"><i class="app-menu__icon fa fa-file-text"></i><span class="app-menu__label">Pending Events</span></a></li>

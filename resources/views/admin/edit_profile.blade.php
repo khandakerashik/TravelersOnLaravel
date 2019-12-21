@@ -23,7 +23,7 @@
         <div class="col-md-6 mx-auto">
           <div class="card card-signin my-4">
             <div class="card-body">
-              <form class="form-signin" method="post">
+              <form class="form-signin" method="post" enctype="multipart/form-data">
               @foreach($admin as $a)
                 <div class="form-label-group my-4">
                   <input type="text" id="inputName" name="inputName" class="form-control" placeholder="Name" required value="{{$a->name}}">

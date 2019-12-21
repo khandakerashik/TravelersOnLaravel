@@ -14,7 +14,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link href=" /css/admin.css" rel="stylesheet" type="text/css" media="all"/>
 <!--js-->
 <script src=" /js/jquery-2.1.1.min.js"></script> 
-
+<script src=" /js/bars.js"></script>
 <!--icons-css-->
 <link href=" /css/font-awesome.css" rel="stylesheet"> 
 <!--Google Fonts-->
@@ -39,6 +39,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 <!--skycons-icons-->
 <script src=" /js/skycons.js"></script>
+
 
 <!--//skycons-icons-->
 </head>
@@ -113,11 +114,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</div>
 		   <div class="clearfix"> </div>
 		</div>
-<!--market updates end here-->
-<!--mainpage chit-chating-->
-
-<!--main page chit chating end here-->
-<!--main page chart start here-->
 
 <!--main page chart layer2-->
 	<div class="chart-layer-1">
@@ -247,14 +243,14 @@ $(".sidebar-icon").click(function() {
             });
 </script>
 <!--scrolling js-->
-		<script src=" /js/jquery.nicescroll.js"></script>
+	<script src=" /js/jquery.nicescroll.js"></script>
     <script src=" /js/scripts.js"></script>
     <script src=" /js/jquery-3.3.1.min.js"></script>
     <script src=" /js/popper.min.js"></script>
     <script src=" /js/bootstrap.min.js"></script>
     <script src=" /js/main.js"></script>
 		<!--//scrolling js-->
-<script src=" /js/bootstrap.js"> </script>
+	<script src=" /js/bootstrap.js"> </script>
 <!-- mother grid end here-->
 </body>
 </html>                     

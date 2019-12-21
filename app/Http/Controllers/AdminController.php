@@ -12,6 +12,7 @@ use App\message;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StudentRequest;
 use Validator;
+use Auth;
 
 class AdminController extends Controller
 {
@@ -134,6 +135,42 @@ class AdminController extends Controller
         return view('admin.confirmdeletefreaks')->with('users', $users);
     }
 
+    function banedfreaksview(){
+        $freaks = DB::table('freaks')->where('status', '0')
+        ->get(); 
+    
+        return view('admin.banedfreaks')->with('freaks', $freaks);
+    }
+
+    function activefreak($email){
+        DB::table('users')
+        ->where('email', $email)
+        ->update(['status' => '1']);
+
+        DB::table('freaks')
+        ->where('email', $email)
+        ->update(['status' => '1']);
+        return redirect()->route('admin.freakslist');
+    }
+
+    function banedagenciesview(){
+        $freaks = DB::table('travel_agencies')->where('status', '0')
+        ->get(); 
+    
+        return view('admin.banedagencies')->with('freaks', $freaks);
+    }
+
+    function activeagencies($email){
+        DB::table('users')
+        ->where('email', $email)
+        ->update(['status' => '1']);
+
+        DB::table('travel_agencies')
+        ->where('email', $email)
+        ->update(['status' => '1']);
+        return redirect()->route('admin.agencylist');
+    }
+
     function deletefreaks($email){
         DB::table('users')->where('email', '=', $email)->delete();
         DB::table('freaks')->where('email', '=', $email)->delete();
@@ -174,38 +211,53 @@ class AdminController extends Controller
     }
 
 	function updateprofile(Request $req){
+
+       // dd(Auth::user());
+       
         $validation = Validator::make($req->all(), [
             'inputName'=>'required|min:6',
-            'inputPhone'=>'required|max:11|integer',
+            //'inputPhone'=>'required|max:11|integer',
+            'pic'=> 'image|nullable',
         ]);
-
         if($validation->fails()){
             return back()
                     ->with('errors', $validation->errors())
                     ->withInput();
         }
-        
-        if($req->hasFile('pic')){
-            $file = $req->file('pic');
-
-            DB::table('admins')
+        $file=$req->file('pic');
+        $file->move('images',$file->getClientOriginalName());
+        DB::table('admins')
             ->where('email', session('user.email'))
-            ->update(['profile_pic' => $req->pic ]);
+            ->update(['profile_pic' => $file->getClientOriginalName() ]);
 
             DB::table('users')
-            ->where('email', session('user.email'))
-            ->update(['profile_pic' => $req->pic]);
+                ->where('email', session('user.email'))
+                ->update(['profile_pic' => $file->getClientOriginalName() ]);
+        //dd($req->file('pic'));
+        // if($req->hasFile('pic')){
+        //     $file = $req->file('pic');
+            
+            
+
+        //     DB::table('admins')
+        //     ->where('email', session('user.email'))
+        //     ->update(['profile_pic' => $req->pic ]);
+
+        //     DB::table('users')
+        //     ->where('email', session('user.email'))
+        //     ->update(['profile_pic' => $req->pic]);
         
-            echo $file->getClientOriginalName()."<br>";
-            echo $file->getClientOriginalExtension()."<br>";
-            echo $file->getSize()."<br>";
-            echo $file->getMimeType();
-           if($file->move('storage', $file->getClientOriginalName())) {
-            echo "success";
-           }
-        }else{
-            echo "upload fail";
-        }
+        //     echo $file->getClientOriginalName()."<br>";
+        //     echo $file->getClientOriginalExtension()."<br>"
+        ;
+        //     echo $file->getSize()."<br>";
+        //     echo $file->getMimeType();
+        //    if($file->move('storage', $file->getClientOriginalName())) {
+        //     echo "success";
+        //    }
+        // }else{
+        //     echo "upload fail";
+        // }
         //$req->pic->storeAs('storage', $req->pic->getClientOriginalName());
 
         DB::table('admins')
@@ -376,6 +428,56 @@ class AdminController extends Controller
                     ->where('name', 'like', '%'. $request->search.'%')
                     ->orWhere('phone', 'like', '%'. $request->search.'%')
                     ->orWhere('email', 'like', '%'. $request->search.'%')
+                    ->get();
+                    if($agencies)
+                    {
+                        foreach ($agencies as $key => $a) {
+                        $output.='<tr>'.
+                        '<td>'.$a->name.'</td>'.
+                        '<td>'.$a->agency_name.'</td>'.
+                        '<td>'.$a->phone.'</td>'.
+                        '<td>'.$a->gender.'</td>'.
+                        '<td>'.$a->email.'</td>'.
+                        '<td>'.$a->profile_pic.'</td>'.
+                        '</tr>';
+                        }
+                    return Response($output);
+                    }
+                 }
+            }
+            public function searchbannedagencies(Request $request)
+            {
+                if($request->ajax())
+                {
+                    $output="";
+                    $agencies=DB::table('travel_agencies')
+                    ->where('status','0')
+                    ->Where('name', 'like', '%'. $request->search.'%')
+                    ->get();
+                    if($agencies)
+                    {
+                        foreach ($agencies as $key => $a) {
+                        $output.='<tr>'.
+                        '<td>'.$a->name.'</td>'.
+                        '<td>'.$a->agency_name.'</td>'.
+                        '<td>'.$a->phone.'</td>'.
+                        '<td>'.$a->gender.'</td>'.
+                        '<td>'.$a->email.'</td>'.
+                        '<td>'.$a->profile_pic.'</td>'.
+                        '</tr>';
+                        }
+                    return Response($output);
+                    }
+                 }
+            }
+            public function searchbannedfreaks(Request $request)
+            {
+                if($request->ajax())
+                {
+                    $output="";
+                    $agencies=DB::table('freaks')
+                    ->where('status','0')
+                    ->Where('name', 'like', '%'. $request->search.'%')
                     ->get();
                     if($agencies)
                     {

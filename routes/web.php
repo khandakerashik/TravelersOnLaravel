@@ -83,7 +83,13 @@ Route::group(['middleware'=>['sess']], function(){
 	 Route::get('/admin/deleteagencies/{email}', 'AdminController@deleteagenciesview')->name('admin.deleteagenciesview');
 	 Route::post('/admin/deleteagencies/{email}', 'AdminController@deleteagencies')->name('admin.deleteagencies');
 
+	 Route::get('/admin/banedfreaks', 'AdminController@banedfreaksview')->name('admin.banedfreaksview');
+	 Route::get('/admin/activefreaks/{email}', 'AdminController@activefreak')->name('admin.activefreak');
 
+	 Route::get('/admin/bannedagencies', 'AdminController@banedagenciesview')->name('admin.banedagenciesview');
+	 Route::get('/admin/activeagencies/{email}', 'AdminController@activeagencies')->name('admin.activeagencies');
+	 Route::get('/search/bannedfreaks', 'AdminController@searchbannedfreaks');
+	 Route::get('/search/bannedagencies', 'AdminController@searchbannedagencies');
 	});
 
 	Route::group(['middleware'=>['freaktype']], function(){
