@@ -49,10 +49,10 @@
                       <td><img src="/images/{{$f->profile_pic}}" height="65px" width="100px"></td>
 
                       <td>
-                        <a href="/admin/freaks/ban/<%= data[i].id %>">Ban</a>
+                        <a href="{{route('admin.banfreaks', $f->email)}}">Ban</a>
                       </td>
                       <td>
-                            <a href="/admin/freaks/delete/<%= data[i].id %>"> Delete</a>
+                            <a href="{{route('admin.deletefreaks', $f->email)}}"> Delete</a>
                       </td>
                     </tr>
                     @endforeach

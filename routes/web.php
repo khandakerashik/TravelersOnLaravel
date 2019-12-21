@@ -20,7 +20,10 @@ Route::get('/login', 'LoginController@index')->name('login.index');
 Route::post('/login', 'LoginController@verify');
 Route::get('/logout', 'LogoutController@index');
 Route::get('/registration', 'RegistrationController@index')->name('registration.index');
-Route::post('/registration', 'RegistrationController@insert')->name('registration.insert');
+Route::get('/registration/freaks', 'RegistrationController@freaksreg')->name('registration.freaks');
+Route::post('/registration/freaks', 'RegistrationController@insertfreaks')->name('registration.insertfreaks');
+Route::get('/registration/agencies', 'RegistrationController@agenciesreg')->name('registration.agencies');
+Route::post('/registration/agencies', 'RegistrationController@insertagencies')->name('registration.agencies');
 Route::get('/home', ['as'=>'home.index','uses'=>'HomeController@index']);
 Route::get('/blogs', ['as'=>'blog.index','uses'=>'BlogController@index']);
 Route::get('/events', ['as'=>'event.index','uses'=>'EventController@index']);
@@ -69,8 +72,18 @@ Route::group(['middleware'=>['sess']], function(){
 
 
 	 Route::get('/admin/notifications', 'AdminController@notifications')->name('admin.notifications');
-	// Route::get('/admin/ban/{id}', 'AdminController@cban')->name('admin.cban');
-	// Route::post('/admin/ban/{id}', 'AdminController@ban')->name('admin.ban');
+
+	 Route::get('/admin/banfreaks/{email}', 'AdminController@banfreaksview')->name('admin.banfreaksview');
+	 Route::post('/admin/banfreaks/{email}', 'AdminController@banfreaks')->name('admin.banfreaks');
+	 Route::get('/admin/deletefreaks/{email}', 'AdminController@deletefreaksview')->name('admin.deletefreaksview');
+	 Route::post('/admin/deletefreaks/{email}', 'AdminController@deletefreaks')->name('admin.deletefreaks');
+
+	 Route::get('/admin/banagencies/{email}', 'AdminController@banagenciesview')->name('admin.banagenciesview');
+	 Route::post('/admin/banagencies/{email}', 'AdminController@banagencies')->name('admin.banagencies');
+	 Route::get('/admin/deleteagencies/{email}', 'AdminController@deleteagenciesview')->name('admin.deleteagenciesview');
+	 Route::post('/admin/deleteagencies/{email}', 'AdminController@deleteagencies')->name('admin.deleteagencies');
+
+
 	});
 
 	Route::group(['middleware'=>['freaktype']], function(){

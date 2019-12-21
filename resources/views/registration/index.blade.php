@@ -16,14 +16,14 @@
 			<div class="row">
 				<div class="table-data1 text-center col-sm-9 col-md-6 col-lg-6">
 					<div class="data1">
-						<a class="label-anchor text-white my-5" href="/registration/freaks"><img class="label-image my-4" src=" /images/freaks.png" height="150" width="150"> </br> Register as Freaks</a>
+						<a class="label-anchor text-white my-5" href="{{route('registration.freaks')}}"><img class="label-image my-4" src=" /images/freaks.png" height="150" width="150"> </br> Register as Freaks</a>
 					</div>
 					<p class="paragraph justify-content-center text-white my-4">Freaks</p>
 				</div>
 
 				<div class="table-data2 text-center col-sm-9 col-md-6 col-lg-6">
 					<div class="data2">
-						<a class="label-anchor text-white my-5" href="/registration/agencies"><img class="label-image my-4" src=" /images/agencies.png" height="150" width="150"> </br> Register as Agencies</a>
+						<a class="label-anchor text-white my-5" href="{{route('registration.agencies')}}"><img class="label-image my-4" src=" /images/agencies.png" height="150" width="150"> </br> Register as Agencies</a>
 					</div>
 					<p class="paragraph justify-content-center text-white my-4">Travel Agency</p>
 				</div>

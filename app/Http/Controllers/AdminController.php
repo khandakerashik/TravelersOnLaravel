@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\admin;
 use App\users;
+use App\freak;
+use App\agency;
 use App\event;
 use App\message;
 use Illuminate\Support\Facades\DB;
@@ -29,11 +31,7 @@ class AdminController extends Controller
         ->with('blogs', $blogs)
         ->with('freaks', $freaks);
     }
-    public function home(){
-
-		return view('admin.home');
-	}
-
+ 
     function users(Request $request){
         //$users = User::all();
         $users = DB::table('users')->where('status','1')
@@ -52,12 +50,12 @@ class AdminController extends Controller
 		return view('admin.profile')->with('admin', $admin);
     }
     function freakslist(Request $request){
-        $freaks = DB::table('freaks')
+        $freaks = DB::table('freaks')->where('status', '1')
 		->get(); 
 		return view('admin.freaks')->with('freaks', $freaks);
     }
     function agencylist(Request $request){
-        $agencies = DB::table('travel_agencies')
+        $agencies = DB::table('travel_agencies')->where('status', '1')
 		->get(); 
 		return view('admin.agencies')->with('agencies', $agencies);
     }
@@ -90,8 +88,6 @@ class AdminController extends Controller
         $event->save();
         
         return redirect()->route('admin.pendingevents');
-        
-
     }
     function approveevent($id){
         $event = DB::table('events')->where('id', $id)
@@ -106,28 +102,81 @@ class AdminController extends Controller
     
         return view('admin.confirmdeleteevent')->with('event', $event);
     }
-    function ban(Request $req, $id){
 
-    	$user = users::find($id);
-        $user->status = '0';
-        $user->save();
-        
-        return redirect()->route('admin.userlist');
-        
-
+    function confirmdeleteevent($id){
+    	event::destroy($id);
+    	return redirect()->route('admin.pendingevents');
     }
-    function cban($id){
-        $user = DB::table('users')->where('id', $id)
+
+    
+    function banfreaksview($email){
+        $user = DB::table('freaks')->where('email', $email)
         ->get(); 
     
-        return view('admin.ban')->with('users', $user);
+        return view('admin.confirmbanfreaks')->with('users', $user);
+    }
+    function banfreaks(Request $req, $email){
+
+        DB::table('users')
+        ->where('email', $email)
+        ->update(['status' => '0']);
+
+        DB::table('freaks')
+        ->where('email', $email)
+        ->update(['status' => '0']);
+        return redirect()->route('admin.freakslist');
     }
     
-	
+    function deletefreaksview($email){
+        $users = DB::table('freaks')->where('email', $email)
+        ->get(); 
+    
+        return view('admin.confirmdeletefreaks')->with('users', $users);
+    }
+
+    function deletefreaks($email){
+        DB::table('users')->where('email', '=', $email)->delete();
+        DB::table('freaks')->where('email', '=', $email)->delete();
+        //users::destroy($email);
+        return redirect()->route('admin.freakslist');
+    }
+
+    function banagenciesview($email){
+        $user = DB::table('travel_agencies')->where('email', $email)
+        ->get(); 
+    
+        return view('admin.confirmbanagencies')->with('users', $user);
+    }
+    function banagencies(Request $req, $email){
+
+        DB::table('users')
+        ->where('email', $email)
+        ->update(['status' => '0']);
+
+        DB::table('travel_agencies')
+        ->where('email', $email)
+        ->update(['status' => '0']);
+        return redirect()->route('admin.agencylist');
+    }
+    
+    function deleteagenciesview($email){
+        $users = DB::table('travel_agencies')->where('email', $email)
+        ->get(); 
+    
+        return view('admin.confirmdeleteagencies')->with('users', $users);
+    }
+
+    function deleteagencies($email){
+        DB::table('users')->where('email', '=', $email)->delete();
+        DB::table('travel_agencies')->where('email', '=', $email)->delete();
+        //users::destroy($email);
+        return redirect()->route('admin.agencylist');
+    }
+
 	function updateprofile(Request $req){
         $validation = Validator::make($req->all(), [
             'inputName'=>'required|min:6',
-            'inputPhone'=>'required|max:11',
+            'inputPhone'=>'required|max:11|integer',
         ]);
 
         if($validation->fails()){
@@ -261,11 +310,7 @@ class AdminController extends Controller
         return view('admin.delete')->with('users', $user);
     }
 
-    function confirmdeleteevent($id){
-    	event::destroy($id);
-    	return redirect()->route('admin.pendingevents');
-    }
-
+   
     function addadmin(){
 
         return view('admin.addadmin');
@@ -312,7 +357,6 @@ class AdminController extends Controller
                         foreach ($freaks as $key => $freak) {
                         $output.='<tr>'.
                         '<td>'.$freak->name.'</td>'.
-                        '<td>'.$freak->name.'</td>'.
                         '<td>'.$freak->phone.'</td>'.
                         '<td>'.$freak->gender.'</td>'.
                         '<td>'.$freak->email.'</td>'.
@@ -338,7 +382,7 @@ class AdminController extends Controller
                         foreach ($agencies as $key => $a) {
                         $output.='<tr>'.
                         '<td>'.$a->name.'</td>'.
-                        '<td>'.$a->name.'</td>'.
+                        '<td>'.$a->agency_name.'</td>'.
                         '<td>'.$a->phone.'</td>'.
                         '<td>'.$a->gender.'</td>'.
                         '<td>'.$a->email.'</td>'.
