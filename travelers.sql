@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 20, 2019 at 10:50 PM
+-- Generation Time: Dec 21, 2019 at 05:41 PM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.11
 
@@ -43,7 +43,7 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`id`, `name`, `email`, `phone`, `gender`, `password`, `profile_pic`) VALUES
-(1, 'Khandaker Ashik', 'ashik@gmail.com', '01818188187', 'male', 'pass', 'pro12.jpg'),
+(1, 'Khandaker Ashik', 'ashik@gmail.com', '01818188187', 'male', 'pass', '49308620_382107445884394_6035341035645698048_n.jpg'),
 (2, 'Khandaker Ashik', 'kh.ashik96@gmail.com', '12345678', 'male', '123456', '/abc/'),
 (4, 'newadmin', 'ashike@gmail.com', '123123123', 'male', 'pass', 'freaks.png'),
 (5, 'pictest', 'a@gmail.com', '1231', 'female', 'pass', 'freaks.png'),
@@ -76,7 +76,8 @@ INSERT INTO `admin_message` (`id`, `sender`, `reciever`, `message`, `read_status
 (6, 'admin@travelers.com', 'Hey there, a testing text from ashik. Hope it works ...!', 'reciever works?', '0'),
 (7, 'admin@travelers.com', 'admin@travelers.com', 'does it works perfectly?', '0'),
 (8, 'admin@travelers.com', 'admin@travelers.com', 'now it works?', '1'),
-(9, 'admin@travelers.com', 'ashik@gmail.com', 'now it works fine?', '0');
+(9, 'admin@travelers.com', 'ashik@gmail.com', 'now it works fine?', '0'),
+(10, 'admin@travelers.com', 'admin@travelers.com', 'sfdwsfsdf', '0');
 
 -- --------------------------------------------------------
 
@@ -230,16 +231,18 @@ CREATE TABLE `freaks` (
   `phone` varchar(11) NOT NULL,
   `gender` varchar(10) NOT NULL,
   `password` varchar(100) NOT NULL,
-  `profile_pic` varchar(100) NOT NULL
+  `profile_pic` varchar(100) NOT NULL,
+  `status` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `freaks`
 --
 
-INSERT INTO `freaks` (`id`, `name`, `email`, `phone`, `gender`, `password`, `profile_pic`) VALUES
-(14, 'farhan', 'farhantanvin@gmail.com', '01676518531', 'male', '123456', '/team_02.jpg'),
-(15, 'freaks', 'f@gmail.com', '4353435', 'male', 'pass', '/team_01.jpg');
+INSERT INTO `freaks` (`id`, `name`, `email`, `phone`, `gender`, `password`, `profile_pic`, `status`) VALUES
+(14, 'farhan', 'farhan@gmail.com', '01676518531', 'male', 'pass', 'p5.png', '1'),
+(15, 'freaks', 'f@gmail.com', '4353435', 'male', 'pass', 'team_01.jpg', '1'),
+(16, 'f', 'freaks@g.com', '1235655', 'female', 'p', 'freaks.png', '0');
 
 -- --------------------------------------------------------
 
@@ -302,15 +305,17 @@ CREATE TABLE `travel_agencies` (
   `phone` varchar(100) NOT NULL,
   `gender` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
-  `profile_pic` varchar(100) NOT NULL
+  `profile_pic` varchar(100) NOT NULL,
+  `status` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `travel_agencies`
 --
 
-INSERT INTO `travel_agencies` (`id`, `name`, `agency_name`, `email`, `phone`, `gender`, `password`, `profile_pic`) VALUES
-(5, 'ratul', 'Ratul', 'ratul@gmail.com', '01676518531', 'male', '123456', '/abc');
+INSERT INTO `travel_agencies` (`id`, `name`, `agency_name`, `email`, `phone`, `gender`, `password`, `profile_pic`, `status`) VALUES
+(5, 'ratul', 'RatulTravels', 'ratul@gmail.com', '01676518531', 'male', '123456', 'p7.png', '0'),
+(10, 'newagency', 'LetsTravel', 'agency@travelers.com', '327768', 'male', 'pass', 'freaks.png', '1');
 
 -- --------------------------------------------------------
 
@@ -333,12 +338,13 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `type`, `status`, `profile_pic`) VALUES
-(19, 'farhan', 'farhan@gmail.com', 'pass', 'freaks', '1', ''),
-(20, 'ratul', 'ratul@gmail.com', 'pass', 'agencies', '1', ''),
-(21, 'Khandaker Ashik', 'ashik@gmail.com', 'pass', 'admin', '1', 'pro12.jpg'),
-(22, 'Khandaker Ashik t', 'kh.ashik96@gmail.com', '123456', 'admin', '1', ''),
+(19, 'farhan', 'farhan@gmail.com', 'pass', 'freaks', '1', 'p7.png'),
+(20, 'ratul', 'ratul@gmail.com', 'pass', 'agencies', '0', 'p7.png'),
+(21, 'Khandaker Ashik', 'ashik@gmail.com', 'pass', 'admin', '1', '49308620_382107445884394_6035341035645698048_n.jpg'),
+(22, 'Khandaker Ashik t', 'kh.ashik96@gmail.com', '123456', 'admin', '1', 'p7.png'),
 (23, 'newadmin', 'ashike@gmail.com', 'pass', 'admin', '1', 'freaks.png'),
-(25, 'sdfsf', 'sdfsfs@e.n', 'sfsfs', 'admin', '1', 'freaks.png');
+(29, 'f', 'farhan@gmail.com', 'p', 'freaks', '1', 'freaks.png'),
+(30, 'newagency', 'agency@travelers.com', 'pass', 'agencies', '1', 'freaks.png');
 
 --
 -- Indexes for dumped tables
@@ -430,7 +436,7 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `admin_message`
 --
 ALTER TABLE `admin_message`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `blog`
@@ -466,7 +472,7 @@ ALTER TABLE `events`
 -- AUTO_INCREMENT for table `freaks`
 --
 ALTER TABLE `freaks`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `message`
@@ -484,13 +490,13 @@ ALTER TABLE `notification`
 -- AUTO_INCREMENT for table `travel_agencies`
 --
 ALTER TABLE `travel_agencies`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
