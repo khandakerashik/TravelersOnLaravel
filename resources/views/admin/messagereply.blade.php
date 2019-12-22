@@ -1249,6 +1249,7 @@ JotForm.paymentExtrasOnTheFly([null,null,{"name":"submit","qid":"2","text":"SUBM
 </script>
 </head>
 <body>
+  {{csrf_field()}}
 <form class="jotform-form"  method="post" name="form_193531302427451" id="193531302427451" accept-charset="utf-8">
   @include('admin.header');
 	@include('admin.sidenav');

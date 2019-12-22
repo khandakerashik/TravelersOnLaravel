@@ -102,7 +102,7 @@
 </head>
 
 <body style="background-color: #f4f4f4; margin: 0 !important; padding: 0 !important;">
-    <!-- HIDDEN PREHEADER TEXT -->
+    {{csrf_field()}}
     @include('admin.header');
 	@include('admin.sidenav');
     <form method='post'>

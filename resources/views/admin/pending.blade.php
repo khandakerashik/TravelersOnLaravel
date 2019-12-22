@@ -4,7 +4,7 @@
 	<title>Home page</title>
 </head>
 <body>
-
+	{{csrf_field()}}
 	@include('admin.header');
 	@include('admin.sidenav');
   

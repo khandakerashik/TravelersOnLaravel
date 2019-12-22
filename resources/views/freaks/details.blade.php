@@ -4,6 +4,7 @@
 	<title>BlogS</title>
 </head>
 <body>
+{{csrf_field()}}
 	<h1>Blog Details</h1>
 	<a href="{{route('author.index')}}">Back</a> | 
 	<a href="/logout">logout</a>

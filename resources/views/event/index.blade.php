@@ -6,7 +6,7 @@
     <script src="  /js/modernizer.js"></script>
 </head>
 <body>
-
+    {{csrf_field()}}
    <!--    header selected -->
    
    @include('common.adminheader');

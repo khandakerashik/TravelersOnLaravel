@@ -4,6 +4,7 @@
 	<title>User Profile</title>
 </head>
 <body>
+{{csrf_field()}}
 	<h1>Welcome Back, {{session('name')}}</h1>
 	<h1>{{session('name')}}'s Profile</h1> 
 	<a href="/home">Home</a> |

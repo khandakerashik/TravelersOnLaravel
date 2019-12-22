@@ -3,6 +3,7 @@
       <link href="/abc/css/header.css" rel="stylesheet">
   </head>
   <body> 
+  {{csrf_field()}}
     <header class="main_menu_area">
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="/home"><img src="abc/images/logo.png" alt="" height="110px" width="110px"></a>

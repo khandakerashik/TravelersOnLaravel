@@ -5,6 +5,7 @@
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
  <body class="app sidebar-mini">
+  {{csrf_field()}}
     <header class="app-header"><a class="app-header__logo" href="/home"><img src="   /images/logo.png" alt="" height="50px" width="50px"></a>
       <a class="app-sidebar__toggle" href="" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
       <ul class="app-nav">

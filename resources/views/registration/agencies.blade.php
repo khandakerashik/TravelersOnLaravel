@@ -8,7 +8,7 @@
 	<link rel="stylesheet" href=" /css/registration.css">
 </head>
 <body>
-
+{{csrf_field()}}
   <div class="container-fluid">
     <div class="row">
 

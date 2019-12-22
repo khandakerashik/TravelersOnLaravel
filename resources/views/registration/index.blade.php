@@ -8,6 +8,7 @@
 		<link rel="stylesheet" href=" /css/registration.css">
 	</head>
 	<body>
+	{{csrf_field()}}
 		<div class="label col-12 text-center">
 		    <a href="/home"><img class="label-image my-3" src=" /images/logo.png" height="160" width="160"></a>
 		 </div>

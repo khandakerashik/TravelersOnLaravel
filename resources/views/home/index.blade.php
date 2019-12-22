@@ -7,6 +7,7 @@
     <script src=" /js/modernizer.js"></script>
 </head>
 <body> 
+        {{csrf_field()}}
 		@include('common.adminheader');
  
         <div class="container h-50">

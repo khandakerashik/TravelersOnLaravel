@@ -5,6 +5,7 @@
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body class="app sidebar-mini">
+  {{csrf_field()}}
     <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
     <aside class="app-sidebar">
       <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="/images/{{session('profile_pic')}}" alt="User Image" height="50px" width="50px" style=" border-radius: 50%;">

@@ -5,12 +5,8 @@
     <script src=" /js/modernizer.js"></script>
 </head>
 <body> 
-
-    <!--    header selected -->
-   
+    {{csrf_field()}}
     @include('common.adminheader');
-     
-    
     <div id="wrapper">
         <div class="section">
             <div class="container">

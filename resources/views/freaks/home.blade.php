@@ -5,6 +5,7 @@
         </title>
     </head>
     <body>
+	{{csrf_field()}}
     <h1>Computer Shop Home</h1>
     <a href="{{route('customer.index')}}">Profile</a>
     <a href="/logout">Logout</a>

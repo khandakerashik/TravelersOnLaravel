@@ -7,8 +7,8 @@
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body class="app sidebar-mini">
-
- 	 @include('admin.header');
+  {{csrf_field()}}
+ 	@include('admin.header');
 	@include('admin.sidenav');
   
     <main class="app-content">

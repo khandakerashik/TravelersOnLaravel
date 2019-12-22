@@ -14,7 +14,7 @@
 	    <div class="row">
 
 	    	<div class="label col-12 text-center">
-	      		 <a href=""><img class="label-image my-3" src=" /images/logo.png" height="160" width="160"></a>
+	      		 <a href="/home"><img class="label-image my-3" src=" /images/logo.png" height="160" width="160"></a>
 	    	</div>
 
 	      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">

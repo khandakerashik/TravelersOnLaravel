@@ -10,6 +10,7 @@
 </head>
 <body class="app sidebar-mini">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
+    {{csrf_field()}}
     @include('admin.header');
     @include('admin.sidenav');
   

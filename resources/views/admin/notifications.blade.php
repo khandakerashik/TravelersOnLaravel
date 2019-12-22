@@ -8,7 +8,7 @@
 </head>
 <body class="app sidebar-mini">
   
-  
+  {{csrf_field()}}
   @include('admin.header');
 	@include('admin.sidenav');
   

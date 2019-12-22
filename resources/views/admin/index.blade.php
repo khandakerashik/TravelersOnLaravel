@@ -44,6 +44,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!--//skycons-icons-->
 </head>
 <body class="app sidebar-mini">	
+	{{csrf_field()}}
 	@include('admin.header');
 	@include('admin.sidenav');
 	
@@ -68,7 +69,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		$(document).ready(function() {
 			 var navoffeset=$(".header-main").offset().top;
 			 $(window).scroll(function(){
-				var scrollpos=$(window).scrollTop(); 
+				var scrollpos=$(window).scrollTop();
 				if(scrollpos >=navoffeset){
 					$(".header-main").addClass("fixed");
 				}else{
