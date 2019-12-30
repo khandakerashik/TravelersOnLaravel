@@ -29,7 +29,7 @@ class VerifyAgencyType
         }*/
 
         $user = $request->session()->get('user');
-        if( $user->type == 'agency'){
+        if( $user[0]->user_type == 'agencies'){
             return $next($request);
         }
         else{

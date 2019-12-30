@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body class="app sidebar-mini">
-  {{csrf_field()}}
+ 
   @include('admin.header');
 	@include('admin.sidenav');
   
@@ -24,7 +24,8 @@
           <div class="card card-signin my-4">
             <div class="card-body">
               <form class="form-signin" method="post" enctype="multipart/form-data">
-              @foreach($admin as $a)
+                 {{csrf_field()}}
+                 @foreach($admin as $a)
                 <div class="form-label-group my-4">
                   <input type="text" id="inputName" name="inputName" class="form-control" placeholder="Name" required value="{{$a->name}}">
                   <label for="inputName">Name</label>

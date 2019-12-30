@@ -2,10 +2,10 @@
 <html>
 <head>
 	<title>Registration page</title>
-	<link rel="stylesheet" href=" /css/bootstrap.min.css">
-	<script src=" /js/bootstrap.bundle.min.js"></script>
-	<script src=" /js/jquery.slim.min.js"></script>
-	<link rel="stylesheet" href=" /css/registration.css">
+	<link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/registration.css">
+	<script src="/js/bootstrap.bundle.min.js"></script>
+	<script src="/js/jquery.slim.min.js"></script>
 </head>
 <body>
    
@@ -13,35 +13,36 @@
     <div class="row">
 
     	<div class="label col-12 text-center">
-	      		 <a href="/home"><img class="label-image my-3" src=" /images/logo.png" height="160" width="160"></a>
-	    	</div>
+	      <a href="{{ route('home.index') }}"><img class="label-image my-3" src="/images/logo.png" height="160" width="160"></a>
+	    </div>
+
       <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
         <div class="card card-signin my-4">
           <div class="card-body">
             <h5 class="card-title text-center">Register as a Freak</h5>
             <form class="form-signin" method="post" >
+              @csrf
               <div class="form-label-group my-4">
-               
-                <input type="text" id="name" name="name" value="" class="form-control" placeholder="Name"   required>
-                <label for="name">Name</label>
+                <input type="text" id="name" name="name" value="{{old('name')}}" class="form-control" placeholder="Enter your name"   required>
+                <label for="name">Enter your name</label>
                 <span name="namespan"></span>
               </div>
 
               <div class="form-label-group my-4">
-                <input type="email" id="email" name="email" value=""  class="form-control" placeholder="Email address" required>
-                <label for="email">Email address</label>
+                <input type="email" id="email" name="email" value="{{old('email')}}" class="form-control" placeholder="Enter your Email address" required>
+                <label for="email">Enter your Email address</label>
                 <span name="emailspan"></span>
               </div>
 
               <div class="form-label-group my-4">
-                <input type="text" id="phone" name="phone" value=""  class="form-control" placeholder="Phone No" required>
-                <label for="phone">Phone No</label>
+                <input type="text" id="phone" name="phone" value="{{old('phone')}}" class="form-control" placeholder="Enter your Phone No" required>
+                <label for="phone">Enter your Phone No</label>
                 <span name="phonespan"></span>
               </div>
 
               <div class="form-label-group my-4">
               	<div class="form-group">
-      			      <select class="form-control" id="gender" name="gender" value="" required>
+      			      <select class="form-control" id="gender" value="{{old('gender')}}" name="gender" required>
       			      	<option>Select your Gender</option>
       			        <option value="male">Male</option>
       			        <option value="female">Female</option>
@@ -51,28 +52,36 @@
               </div>
 
               <div class="form-label-group my-4">
-                <input type="password" id="password" name="password"  value="" class="form-control" placeholder="Password" required>
-                <label for="password">Password</label>
+                <input type="password" id="password" name="password" value="{{old('password')}}" class="form-control" placeholder="Enter your Password" required>
+                <label for="password">Enter your Password</label>
                 <span name="passwordspan"></span>
               </div>
               
               <div class="form-label-group my-4">
-                <input type="password" id="confirmpassword" name="confirmpassword" value=""  class="form-control" placeholder="Confirm Password" required>
-                <label for="confirmpassword">Confirm password</label>
+                <input type="password" id="confirmpassword" name="confirmpassword" value="{{old('confirmpassword')}}" class="form-control" placeholder="Enter your Password" required>
+                <label for="confirmpassword">Enter your Confirm password</label>
                 <span name="confirmpasswordspan"></span>
               </div>
-                
-             
-                
-            <div class="text-center">
-                    
 
               <button class="btn btn-lg btn-block my-4" type="submit">Register</button>
 
               <div class="form-label-group text-center my-4">
-	              <a href="/login">Login</a>
+	              <a href="{{ route('login.index') }}">Login</a>
 	          </div>
             </form>
+
+
+                      @if ($errors->any())
+              <div class="alert alert-danger">
+                  <ul>
+                      @foreach ($errors->all() as $error)
+                          <li>{{ $error }}</li>
+                      @endforeach
+                  </ul>
+              </div>
+          @endif
+
+
           </div>
         </div>
       </div>

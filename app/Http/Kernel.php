@@ -62,9 +62,10 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'sess'     => \App\Http\Middleware\VerifySession::class,
-        'admintype'     => \App\Http\Middleware\VerifyAdminType::class,
-        'freaktype'     => \App\Http\Middleware\VerifyFreakType::class,
-        'agencytype'     => \App\Http\Middleware\VerifyAgencyType::class
+        'type'     => \App\Http\Middleware\VerifyUserType::class,
+        'admintype' => \App\Http\Middleware\VerifyAdminType::class,
+        'freakstype' => \App\Http\Middleware\VerifyFreakType::class,
+        'agenciestype'=>\App\Http\Middleware\VerifyAgencyType::class,
     ];
 
     /**

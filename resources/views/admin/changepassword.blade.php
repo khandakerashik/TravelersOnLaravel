@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body class="app sidebar-mini">
-  {{csrf_field()}}
+ 
  	@include('admin.header');
 	@include('admin.sidenav');
   
@@ -24,6 +24,7 @@
           <div class="card card-signin my-4">
             <div class="card-body">
               <form class="form-signin" method="post">
+                {{csrf_field()}}
                 <div class="form-label-group my-4">
                   <input type="password" id="inputPassword" name="Password" class="form-control" placeholder="Password"  >
                   <label for="inputPassword">Password</label>

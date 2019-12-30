@@ -3,25 +3,31 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\users;
-use App\products;
 use Illuminate\Support\Facades\DB;
+use App\blog;
+use App\event;
 
 class HomeController extends Controller
 {
-    function index(Request $request){
+    public function index()
+     {
 
-		$blogs = DB::table('blog')
-		->get();
+    	$blog = blog::all()
+                ->where('status',1)
+               ->take(3);
 
-		$events = DB::table('events')
-		->get();
+        $event =event::all()
+        		->take(3);    
+       
+		   return view('home.index')->with('blog',$blog)
+		   							->with('event',$event);
 	
-		return view('home.index')->with('blogs', $blogs)->with('events', $events);
-	}
+	 }
+
+
+
+
+
+
+
 }
-
-
-
-
-

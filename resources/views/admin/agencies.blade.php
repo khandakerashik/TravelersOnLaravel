@@ -57,7 +57,7 @@
                       <td>{{$a->email}}</td>
                       <td>{{$a->phone}}</td>
                       <td>{{$a->gender}}</td>
-                      <td><img src="/images/{{$a->profile_pic}}" height="65px" width="100px"></td>
+                      <td><img src="/{{$a->profile_pic}}" height="65px" width="100px"></td>
 
                       <td>
                         <a href="{{route('admin.banagencies', $a->email)}}">Ban</a>

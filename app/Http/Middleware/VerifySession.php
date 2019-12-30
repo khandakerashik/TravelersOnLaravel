@@ -15,11 +15,10 @@ class VerifySession
      */
     public function handle($request, Closure $next)
     {
-        if($request->session()->has('email')){
+        if($request->session()->has('user')){
             return $next($request);
-        }
-         else{
-            return redirect()->route('login.index');
+        }else{
+            return redirect()->route('home.index');
         }
     }
 }

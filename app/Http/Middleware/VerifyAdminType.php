@@ -29,7 +29,7 @@ class VerifyAdminType
         }*/
 
         $user = $request->session()->get('user');
-        if( $user->type == 'admin'){
+        if( $user[0]->user_type == 'admin'){
             return $next($request);
         }
         else{

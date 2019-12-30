@@ -29,11 +29,16 @@ class VerifyFreakType
         }*/
 
         $user = $request->session()->get('user');
-        if( $user->type == 'freaks'){
+        if($user[0]->user_type == 'freaks'){
             return $next($request);
         }
+        // elseif($user[0]->user_type == 'agencies'){
+        //     return $next($request);
+            
+        // }
         else{
-            return redirect()->route('home.index');
+
+           return redirect()->route('home.index'); 
         }
     }
 }

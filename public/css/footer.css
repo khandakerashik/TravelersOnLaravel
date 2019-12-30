@@ -1,0 +1,26 @@
+#footerwrap {
+	padding-top: 5px;
+background: #384452;
+	
+}
+.container1{
+	
+}
+
+#footerwrap p {
+	color: #bfc9d3;
+}
+
+#footerwrap h4 {
+	color: white;
+}
+
+#footerwrap i {
+	font-size: 30px;
+	color: #bfc9d3;
+	padding-right: 25px;
+}
+
+#footerwrap i:hover {
+	color: #00b3fe
+}

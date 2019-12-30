@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class message extends Model
 {
     //protected $table = "user_table";
-    protected $table = "admin_message";
+    protected $table = "message";
     protected $primaryKey = "id";
     public $timestamps = false;
 

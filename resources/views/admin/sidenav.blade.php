@@ -8,10 +8,10 @@
   {{csrf_field()}}
     <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
     <aside class="app-sidebar">
-      <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="/images/{{session('profile_pic')}}" alt="User Image" height="50px" width="50px" style=" border-radius: 50%;">
+      <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="/images/{{session('user')[0]['profile_pic']}}" alt="User Image" height="50px" width="50px" style=" border-radius: 50%;">
         <div>
-          <p class="app-sidebar__user-name">{{session('name')}}</p>
-          <p class="app-sidebar__user-designation">{{session('email')}}</p>
+          <p class="app-sidebar__user-name">{{ session('user')[0]['name'] }}</p>
+          <p class="app-sidebar__user-designation">{{ session('user')[0]['email'] }}</p>
         </div>
       </div>
       <ul class="app-menu">
@@ -23,8 +23,8 @@
         <li><a class="app-menu__item" href="{{route('admin.agencylist')}}"><i class="app-menu__icon fa fa-users"></i><span class="app-menu__label">Agencies</span></a></li> 
         <li><a class="app-menu__item" href="{{route('admin.banedfreaksview')}}"><i class="app-menu__icon fa fa-user"></i><span class="app-menu__label">Banned Freaks</span></a></li>
         <li><a class="app-menu__item" href="{{route('admin.banedagenciesview')}}"><i class="app-menu__icon fa fa-user"></i><span class="app-menu__label">Banned Agencies</span></a></li>
-        <li><a class="app-menu__item" href="{{route('blog.index')}}"><i class="app-menu__icon fa fa-file-text"></i><span class="app-menu__label">Blogs</span></a></li>
-        <li><a class="app-menu__item" href="{{route('event.index')}}"><i class="app-menu__icon fa fa-file-text"></i><span class="app-menu__label">Events</span></a></li>
+        <li><a class="app-menu__item" href="{{route('blogs.index')}}"><i class="app-menu__icon fa fa-file-text"></i><span class="app-menu__label">Blogs</span></a></li>
+        <li><a class="app-menu__item" href="{{route('events.index')}}"><i class="app-menu__icon fa fa-file-text"></i><span class="app-menu__label">Events</span></a></li>
         <li><a class="app-menu__item" href="{{route('admin.pendingevents')}}"><i class="app-menu__icon fa fa-file-text"></i><span class="app-menu__label">Pending Events</span></a></li>
         <li><a class="app-menu__item" href="{{route('admin.messages')}}"><i class="app-menu__icon fa fa-inbox"></i><span class="app-menu__label">Message</span></a></li>
         <li><a class="app-menu__item" href="{{route('admin.notifications')}}"><i class="app-menu__icon fa fa-bell"></i><span class="app-menu__label">Notifications</span></a></li>        </li>
